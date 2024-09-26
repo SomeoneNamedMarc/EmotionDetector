@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Application\" />
+    <Folder Include="InterfaceAdapter\" />
   </ItemGroup>
 
 </Project>
