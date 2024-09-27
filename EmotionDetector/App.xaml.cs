@@ -10,5 +10,4 @@ namespace EmotionDetector
     public partial class App : Application
     {
     }
-
 }
