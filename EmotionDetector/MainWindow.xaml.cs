@@ -20,7 +20,13 @@ namespace EmotionDetector
         public MainWindow()
         {
             InitializeComponent();
-            Debug.WriteLine("Hejsa!");
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LinQFunctions test = new LinQFunctions("C:\\Users\\Jannick W. Andresen\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\ChatMessage1Sad.xml");
         }
     }
 }

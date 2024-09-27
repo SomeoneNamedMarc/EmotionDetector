@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EmotionDetector"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <StackPanel x:Name="StackTest">
+        <Button Height="25" Width="50" Content="Populate" Click="Button_Click"></Button>
+    </StackPanel>
 </Window>

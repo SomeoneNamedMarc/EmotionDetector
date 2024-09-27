@@ -1,0 +1,5 @@
+<!ELEMENT ChatMessages (Topic, Emotion, Message+)>
+
+<!ELEMENT Topic (#PCDATA)>
+<!ELEMENT Emotion (#PCDATA)>
+<!ELEMENT Message (#PCDATA)>
