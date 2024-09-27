@@ -40,9 +40,25 @@
     
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Height="32" Orientation="Horizontal">
-            <ComboBox Width="120" Margin="105,0,0,0"/>
-            <ComboBox Width="120" Margin="20,0,0,0"/>
-            <TextBox TextWrapping="Wrap" x:Name="SearchTermTextBox" Width="106" Margin="280, 0, 0, 0"  HorizontalAlignment="Right" Height="20" BorderBrush="Black" >
+            <ComboBox Width="120" Margin="105,0,0,0" ItemsSource="{Binding EmotionsSelection}" x:Name="MoodSelection" Control.HorizontalAlignment="Center" Control.VerticalAlignment="Center"/>
+            <TextBlock Text="Emotion" IsHitTestVisible="False" Margin="-85,7,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MoodSelection,Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="SearchTermTextBox" Width="106" Margin="300, 0, 0, 0"  HorizontalAlignment="Right" Height="25" BorderBrush="Black" Padding="2, 3, 1, 0">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
             </TextBox>
 
             <TextBlock IsHitTestVisible="False" Text="Search Here" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-85,-1,0,0" Foreground="DarkGray">
@@ -57,7 +73,24 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button Content="GO" x:Name="btnSearch" Height="22" Width="27" Margin="5, 0, 0, 0" HorizontalAlignment="Right" Click="btnSearchOnClick"/>
+            <ComboBox Width="120" Height="25" Margin="10, 0, 0, 0" Text="ACTION" IsEditable="False" IsReadOnly="True" Focusable="False" x:Name="ActionBox">
+
+                <Button Content="Count occurance" x:Name="btnSearchOccurance" Height="Auto" Width="108" HorizontalAlignment="Stretch" Click="btnSearchOccuranceOnClick"/>
+                <Button Content="Find message" x:Name="btnSearch" Height="Auto" Width="108" HorizontalAlignment="Stretch" Click="btnSearchOnClick"/>
+            </ComboBox>
+            <TextBlock Text="Search Action" IsHitTestVisible="False" Margin="-95,7,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ActionBox,Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Left" Width="100">

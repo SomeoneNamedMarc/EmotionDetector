@@ -17,9 +17,11 @@ namespace EmotionDetector
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {   
+
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<string> Conversations { get; set; }
+        public ObservableCollection<string> EmotionsSelection { get; set; }
 
         public MainWindow()
         {
@@ -40,13 +42,28 @@ namespace EmotionDetector
                 "REEE",
                 "REEEE"
             };
+            EmotionsSelection = new ObservableCollection<string>
+            {
+                "None",
+                "HappyConvo",
+                "SadConvo",
+                "AngryConvo",
+                "REEE",
+                "REEEE"
+            };
 
             DataContext = this;
         }
 
         void btnSearchOnClick(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(SearchTermTextBox.Text);
+            //MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
+            MessageBox.Show(SearchTermTextBox.Text);
+        }
+        void btnSearchOccuranceOnClick(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
+            MessageBox.Show(SearchTermTextBox.Text);
         }
     }
 }
