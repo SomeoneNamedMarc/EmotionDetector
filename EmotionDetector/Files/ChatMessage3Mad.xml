@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ChatMessages  SYSTEM "ChatMessagesDTD.dtd">
+
+<ChatMessages>
+  <Topic>Broken Phone</Topic>
+  <Emotion>Mad</Emotion>
+  <Message>I can't believe it! My phone just broke again!</Message>
+  <Message>Wait, again? Didn’t you just get it repaired?</Message>
+  <Message>Yes! I had it fixed last week, and now it won’t even turn on!</Message>
+  <Message>That’s ridiculous! Did you try calling the repair shop?</Message>
+  <Message>Of course! They said I must have damaged it. Can you believe that?</Message>
+  <Message>What?! That’s so unfair. It’s their fault!</Message>
+  <Message>I know! I’m so angry right now.</Message>
+  <Message>You should demand a refund or a proper repair.</Message>
+  <Message>I’m definitely going to do that. I’ve had enough!</Message>
+  <Message>Good, don’t let them get away with this!</Message>
+</ChatMessages>
