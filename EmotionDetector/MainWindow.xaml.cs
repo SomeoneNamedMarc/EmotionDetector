@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,21 +19,53 @@ namespace EmotionDetector
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        private ILinq linq;
+    {   
+
+        public ObservableCollection<string> Messages { get; set; }
+        public ObservableCollection<string> Conversations { get; set; }
+        public ObservableCollection<string> EmotionsSelection { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            linq = new FileService();
-                       
-        }
-        private void LoadMessagesBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var messages = linq.GetMessages("C:\\Users\\Jannick W. Andresen\\Source\\Repos\\EmotionDetector\\EmotionDetector\\xmlFiles\\ChatMessage1.0Sad.xml");  
-            foreach (var message in messages)
+            Messages = new ObservableCollection<string>
             {
-                MessageBox.Show($"Message: {message.Message}");
-            }
+                "Message 1 (right-aligned)",
+                "Message 2 (left-aligned)",
+                "Message 3 (right-aligned)",
+                "Message 4 (left-aligned)",
+                "Another long message to see the wrapping behavior. rEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            };
+            Conversations = new ObservableCollection<string>
+            {
+                "HappyConvo",
+                "SadConvo",
+                "AngryConvo",
+                "REEE",
+                "REEEE"
+            };
+            EmotionsSelection = new ObservableCollection<string>
+            {
+                "None",
+                "HappyConvo",
+                "SadConvo",
+                "AngryConvo",
+                "REEE",
+                "REEEE"
+            };
+
+            DataContext = this;
+        }
+
+        void btnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
+            MessageBox.Show(SearchTermTextBox.Text);
+        }
+        void btnSearchOccuranceOnClick(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
+            MessageBox.Show(SearchTermTextBox.Text);
         }
     }
 }

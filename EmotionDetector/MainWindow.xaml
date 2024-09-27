@@ -5,10 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmotionDetector"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Click="LoadMessagesBtn_Click"
-                Content="test"></Button>
+        Title="MainWindow" ResizeMode="NoResize" Height="600" Width="800">
+    <Window.Resources>
 
-    </Grid>
+        <DataTemplate x:Key="RightAlignedMessageTemplate">
+            <TextBlock Text="{Binding}" 
+                       TextWrapping="Wrap" 
+                       Padding="5" 
+                       Background="#eaecf1"
+                       HorizontalAlignment="Right"
+                       Margin="0, 5, 10, 0"
+                       MaxWidth="400"
+                       FontSize="14">
+            </TextBlock>
+        </DataTemplate>
+
+        <DataTemplate x:Key="LeftAlignedMessageTemplate">
+            <TextBlock Text="{Binding}" 
+                       TextWrapping="Wrap" 
+                       Padding="5" 
+                       Background="#66FF07"
+                       HorizontalAlignment="Left"
+                       Margin="10, 5, 0, 0"
+                       MaxWidth="400"
+                       FontSize="14">
+            </TextBlock>
+        </DataTemplate>
+
+        <local:MessageTemplate 
+            x:Key="MessageTemplate"
+            RightAlignedTemplate="{StaticResource RightAlignedMessageTemplate}" 
+            LeftAlignedTemplate="{StaticResource LeftAlignedMessageTemplate}" />
+    </Window.Resources>
+    
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Height="32" Orientation="Horizontal">
+            <ComboBox Width="120" Margin="105,0,0,0" ItemsSource="{Binding EmotionsSelection}" x:Name="MoodSelection" Control.HorizontalAlignment="Center" Control.VerticalAlignment="Center"/>
+            <TextBlock Text="Emotion" IsHitTestVisible="False" Margin="-85,7,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MoodSelection,Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="SearchTermTextBox" Width="106" Margin="300, 0, 0, 0"  HorizontalAlignment="Right" Height="25" BorderBrush="Black" Padding="2, 3, 1, 0">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <TextBlock IsHitTestVisible="False" Text="Search Here" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-85,-1,0,0" Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <ComboBox Width="120" Height="25" Margin="10, 0, 0, 0" Text="ACTION" IsEditable="False" IsReadOnly="True" Focusable="False" x:Name="ActionBox">
+
+                <Button Content="Count occurance" x:Name="btnSearchOccurance" Height="Auto" Width="108" HorizontalAlignment="Stretch" Click="btnSearchOccuranceOnClick"/>
+                <Button Content="Find message" x:Name="btnSearch" Height="Auto" Width="108" HorizontalAlignment="Stretch" Click="btnSearchOnClick"/>
+            </ComboBox>
+            <TextBlock Text="Search Action" IsHitTestVisible="False" Margin="-95,7,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ActionBox,Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Left" Width="100">
+            <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="Conversations" HorizontalAlignment="Center" Width="101" Height="32" Padding="10, 7, 0, 0"  Background="#FFE6E6E6"/>
+            <ListView Height="521" Background="White" ItemsSource="{Binding Conversations}">
+            </ListView>
+        </StackPanel>
+
+
+        <GridSplitter Width="5" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Messages}" 
+              ItemTemplateSelector="{StaticResource MessageTemplate}">
+                <ItemsControl.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF2A45F3"/>
+                        <GradientStop Color="#FF0ADFF9" Offset="1"/>
+                    </LinearGradientBrush>
+                </ItemsControl.Background>
+            </ItemsControl>
+        </ScrollViewer>
+
+
+    </DockPanel>
 </Window>
