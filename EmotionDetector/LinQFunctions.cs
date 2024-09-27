@@ -13,37 +13,26 @@ namespace EmotionDetector
 {
     internal class LinQFunctions
     {
-        Dictionary<string, int> moodCol = new Dictionary<string, int>();
-
         public LinQFunctions(string path)
         {
-            mostOccuringWords();
-
-            int count = 0;
-            var filename = path;
-            /*
-            XElement ChatMessages = XElement.Load(path);
-
-
-            IEnumerable<string> ChatContent = from Messages in ChatMessages.Descendants("Message") select Messages.Value;
-
-            foreach (var item in ChatContent)
-            {
-                
-
-                if (item.ToLower().Contains("sorry"))
-                {
-                    Debug.WriteLine("True");
-                    count++;
-
-                }
-                Debug.WriteLine(count);
-
-                Debug.WriteLine(item);
-            }
-            */
+            iterateThroughAllFiles();
         }
 
+        Dictionary<string, int> moodCol = new Dictionary<string, int>();
+
+        public void iterateThroughAllFiles() 
+        {
+            string path = "C:\\Users\\Jannick W. Andresen\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\";
+            string[] files = Directory.GetFiles(path);
+            XElement elementMessages = XElement.Load(path);
+            
+            IEnumerable<string> MessagesContent = from Messages in elementMessages.Descendants("Message") select Messages.Value;
+            
+            foreach (var item in MessagesContent)
+            {
+
+            }
+        }
         public void mostOccuringWords() 
         {
             //XElement ChatMessages = XElement.Load("Files\\");
@@ -65,7 +54,6 @@ namespace EmotionDetector
                         moodCol.Add(EmotionContent.First(), 0);
                     }
                     
-                    //Debug.WriteLine(EmotionContent.First());
                     foreach (var item in ChatContent)
                     {
                         string[] splitMessages = item.Split(" ");
@@ -80,9 +68,7 @@ namespace EmotionDetector
                     }
                 }
                 Debug.WriteLine(moodCol.Values.Max());
-                
             }
-            
             MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
         }
     }
