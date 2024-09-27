@@ -11,7 +11,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EmotionDetector.Domain;
 using EmotionDetector.Infastructure;
-using EmotionDetector.InterfaceAdapter;
 
 namespace EmotionDetector
 {
@@ -24,7 +23,7 @@ namespace EmotionDetector
         public MainWindow()
         {
             InitializeComponent();
-            linq = new LinqFunctions();
+            linq = new FileService();
                        
         }
         private void LoadMessagesBtn_Click(object sender, RoutedEventArgs e)

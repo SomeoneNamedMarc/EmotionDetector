@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EmotionDetector.Domain;
 
-namespace EmotionDetector.InterfaceAdapter
+namespace EmotionDetector.Domain
 {
     internal interface ILinq
     {
-        List<ChatMessage> GetMessages(string filePath); 
+        List<ChatMessage> GetMessages(string filePath);
+        string GetEmotion(string filePath);
     }
 }
 

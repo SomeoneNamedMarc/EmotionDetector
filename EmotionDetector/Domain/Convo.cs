@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace EmotionDetector.Domain
 {
-    public class ChatMessage
+    public class Convo
     {
-        public string Message { get; set; }
-        public ChatMessage(string msg) 
-        { 
-            Message = msg;
-        }
+        public List<ChatMessage> ChatMessages = new List<ChatMessage>();
+
+        public string Mood { get; set; } = "";
     }
 }
