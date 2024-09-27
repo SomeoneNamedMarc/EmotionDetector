@@ -28,7 +28,7 @@ namespace EmotionDetector
         }
         private void LoadMessagesBtn_Click(object sender, RoutedEventArgs e)
         {
-            var messages = linq.GetMessages("test.xml");  
+            var messages = linq.GetMessages("C:\\Users\\Jannick W. Andresen\\Source\\Repos\\EmotionDetector\\EmotionDetector\\xmlFiles\\ChatMessage1.0Sad.xml");  
             foreach (var message in messages)
             {
                 MessageBox.Show($"Message: {message.Message}");
