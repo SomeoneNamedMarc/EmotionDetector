@@ -9,5 +9,6 @@ namespace EmotionDetector.Domain
     public class ChatMessage
     {
         public string Message { get; set; }
+        public List<ChatMessage> ChatMessages;
     }
 }
