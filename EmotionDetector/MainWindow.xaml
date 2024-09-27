@@ -5,68 +5,81 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmotionDetector"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" ResizeMode="NoResize" Height="600" Width="800">
+    <Window.Resources>
 
+        <DataTemplate x:Key="RightAlignedMessageTemplate">
+            <TextBlock Text="{Binding}" 
+                       TextWrapping="Wrap" 
+                       Padding="5" 
+                       Background="#eaecf1"
+                       HorizontalAlignment="Right"
+                       Margin="0, 5, 10, 0"
+                       MaxWidth="400"
+                       FontSize="14">
+            </TextBlock>
+        </DataTemplate>
+
+        <DataTemplate x:Key="LeftAlignedMessageTemplate">
+            <TextBlock Text="{Binding}" 
+                       TextWrapping="Wrap" 
+                       Padding="5" 
+                       Background="#66FF07"
+                       HorizontalAlignment="Left"
+                       Margin="10, 5, 0, 0"
+                       MaxWidth="400"
+                       FontSize="14">
+            </TextBlock>
+        </DataTemplate>
+
+        <local:MessageTemplate 
+            x:Key="MessageTemplate"
+            RightAlignedTemplate="{StaticResource RightAlignedMessageTemplate}" 
+            LeftAlignedTemplate="{StaticResource LeftAlignedMessageTemplate}" />
+    </Window.Resources>
+    
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Height="32">
-            <MenuItem Header="File"/>
-            <MenuItem Header="Edit"/>
-            <MenuItem Header="Help"/>
-        </Menu>
+        <StackPanel DockPanel.Dock="Top" Height="32" Orientation="Horizontal">
+            <ComboBox Width="120" Margin="105,0,0,0"/>
+            <ComboBox Width="120" Margin="20,0,0,0"/>
+            <TextBox TextWrapping="Wrap" x:Name="SearchTermTextBox" Width="106" Margin="280, 0, 0, 0"  HorizontalAlignment="Right" Height="20" BorderBrush="Black" >
+            </TextBox>
+
+            <TextBlock IsHitTestVisible="False" Text="Search Here" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-85,-1,0,0" Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Button Content="GO" x:Name="btnSearch" Height="22" Width="27" Margin="5, 0, 0, 0" HorizontalAlignment="Right" Click="btnSearchOnClick"/>
+        </StackPanel>
 
         <StackPanel DockPanel.Dock="Left" Width="100">
-            <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="Conversations" HorizontalAlignment="Center" Height="32" VerticalAlignment="Bottom"/>
-            <ListView Height="542" Background="White">
-                <ListViewItem Content="Yeet"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="TEST"/>
-                <ListViewItem Content="Yeetus"/>
+            <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="Conversations" HorizontalAlignment="Center" Width="101" Height="32" Padding="10, 7, 0, 0"  Background="#FFE6E6E6"/>
+            <ListView Height="521" Background="White" ItemsSource="{Binding Conversations}">
             </ListView>
         </StackPanel>
 
 
         <GridSplitter Width="5" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Messages}" 
+              ItemTemplateSelector="{StaticResource MessageTemplate}">
+                <ItemsControl.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF2A45F3"/>
+                        <GradientStop Color="#FF0ADFF9" Offset="1"/>
+                    </LinearGradientBrush>
+                </ItemsControl.Background>
+            </ItemsControl>
+        </ScrollViewer>
 
-        <StackPanel>
-            <StackPanel.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="Cyan" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
 
-        </StackPanel>
     </DockPanel>
-
-
-
 </Window>

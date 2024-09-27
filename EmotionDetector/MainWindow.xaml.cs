@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +18,35 @@ namespace EmotionDetector
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<string> Messages { get; set; }
+        public ObservableCollection<string> Conversations { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            Messages = new ObservableCollection<string>
+            {
+                "Message 1 (right-aligned)",
+                "Message 2 (left-aligned)",
+                "Message 3 (right-aligned)",
+                "Message 4 (left-aligned)",
+                "Another long message to see the wrapping behavior. rEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            };
+            Conversations = new ObservableCollection<string>
+            {
+                "HappyConvo",
+                "SadConvo",
+                "AngryConvo",
+                "REEE",
+                "REEEE"
+            };
+
+            DataContext = this;
+        }
+
+        void btnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine(SearchTermTextBox.Text);
         }
     }
 }
