@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Application\" />
     <Folder Include="InterfaceAdapter\" />
   </ItemGroup>
 

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EmotionDetector.Application;
 using EmotionDetector.Domain;
 using EmotionDetector.Infastructure;
 
@@ -24,6 +25,7 @@ namespace EmotionDetector
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<string> Conversations { get; set; }
         public ObservableCollection<string> EmotionsSelection { get; set; }
+        private LoadUseCase loadUseCase;
 
         public MainWindow()
         {
@@ -55,6 +57,8 @@ namespace EmotionDetector
             };
 
             DataContext = this;
+
+            loadUseCase = new LoadUseCase(new FileService());
         }
 
         void btnSearchOnClick(object sender, RoutedEventArgs e)
