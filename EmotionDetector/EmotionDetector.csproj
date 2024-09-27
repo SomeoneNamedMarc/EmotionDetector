@@ -8,10 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<Folder Include="Application\" />
-    <Folder Include="InterfaceAdapter\" />
-    <Folder Include="xmlFiles\" />
-  </ItemGroup>
+		<Folder Include="InterfaceAdapter\" />
+		<Folder Include="xmlFiles\" />
+	</ItemGroup>
 
 </Project>
