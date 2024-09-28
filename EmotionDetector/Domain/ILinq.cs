@@ -12,6 +12,7 @@ namespace EmotionDetector.Domain
         List<ChatMessage> GetMessages(string filePath);
         string GetEmotion(string filePath);
         ObservableCollection<string> GetAllEmotions(string filePath);
+        ObservableCollection<string> GetAllFileNames(string filePath);
     }
 }
 

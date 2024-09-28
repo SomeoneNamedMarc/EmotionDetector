@@ -9,7 +9,6 @@ using EmotionDetector.Domain;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Windows.Shapes;
 
 namespace EmotionDetector.Infastructure
 {
@@ -80,6 +79,21 @@ namespace EmotionDetector.Infastructure
                 }
             }
             return tempEmotions;
+        }
+
+        public ObservableCollection<string> GetAllFileNames(string filePath)
+        {
+            ObservableCollection<string> tempFileNames = new ObservableCollection<string>();
+            string[] files = Directory.GetFiles(filePath);
+
+            foreach (string file in files)
+            {
+                if (file.EndsWith(".xml"))
+                {
+                    tempFileNames.Add(Path.GetFileName(file).Replace(".xml",""));
+                }
+            }
+            return tempFileNames;
         }
     }
 }

@@ -39,14 +39,7 @@ namespace EmotionDetector
                 "Message 4 (left-aligned)",
                 "Another long message to see the wrapping behavior. rEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
             };
-            Conversations = new ObservableCollection<string>
-            {
-                "HappyConvo",
-                "SadConvo",
-                "AngryConvo",
-                "REEE",
-                "REEEE"
-            };
+            Conversations = loadUseCase.GetAllFileNames("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
             EmotionsSelection = loadUseCase.AllEmotions("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
 
             DataContext = this;

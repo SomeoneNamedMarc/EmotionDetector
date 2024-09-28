@@ -26,5 +26,9 @@ namespace EmotionDetector.Application
         {
             return _repository.GetAllEmotions(filePath);
         }
+        public ObservableCollection<string> GetAllFileNames(string filePath)
+        {
+            return _repository.GetAllFileNames(filePath);
+        }
     }
 }
