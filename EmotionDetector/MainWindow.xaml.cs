@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +30,7 @@ namespace EmotionDetector
         public ObservableCollection<string> Conversations { get; set; }
         public ObservableCollection<string> EmotionsSelection { get; set; }
         private LoadUseCase loadUseCase;
+        private string path = "C:\\Users\\mikae\\source\\repos\\EmotionDetector\\EmotionDetector\\Files\\";
 
         public MainWindow()
         {
@@ -71,8 +73,9 @@ namespace EmotionDetector
             {
                 _selectedConversation = value;
                 OnPropertyChanged(nameof(SelectedConversation));
-                MessageBox.Show($"You selected: {SelectedConversation}");
-                Messages = loadUseCase.GetMessages("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\ChatMessage2.0Happy.xml");
+                Messages = loadUseCase.GetMessages(path + SelectedConversation + ".xml");
+                OnPropertyChanged(nameof(Messages));
+
             }
         }
 
