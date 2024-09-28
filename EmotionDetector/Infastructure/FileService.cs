@@ -8,6 +8,8 @@ using EmotionDetector.Domain;
 
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Shapes;
 
 namespace EmotionDetector.Infastructure
 {
@@ -58,16 +60,37 @@ namespace EmotionDetector.Infastructure
 
         public ObservableCollection<string> GetAllEmotions(string filePath)
         {
-            XElement chatMessages = XElement.Load(filePath);
-            IEnumerable<string> emotionContent = from Messages in chatMessages.Descendants("Emotion") select Messages.Value;
-            ObservableCollection<string> tempEmotions = new ObservableCollection<string>();
+            string[] files = Directory.GetFiles(filePath);
 
-            foreach (string emotion in emotionContent)
+            foreach (var file in files)
             {
-                if (!tempEmotions.Contains(emotion))
+                if (file.EndsWith(".xml"))
                 {
-                    tempEmotions.Add(emotion);
+
+                    XElement ChatMessages = XElement.Load(file);
+
+                    IEnumerable<string> EmotionContent = from Messages in ChatMessages.Descendants("Emotion") select Messages.Value;
+                    IEnumerable<string> ChatContent = from Messages in ChatMessages.Descendants("Message") select Messages.Value;
+
+                    if (!moodCol.ContainsKey(EmotionContent.First()))
+                    {
+                        moodCol.Add(EmotionContent.First(), 0);
+                    }
+
+                    foreach (var item in ChatContent)
+                    {
+                        string[] splitMessages = item.Split(" ");
+
+                        foreach (var msg in splitMessages)
+                        {
+                            if (msg.ToLower().Contains("fun"))
+                            {
+                                moodCol[EmotionContent.First()] += 1;
+                            }
+                        }
+                    }
                 }
+                Debug.WriteLine(moodCol.Values.Max());
             }
 
             return tempEmotions;
