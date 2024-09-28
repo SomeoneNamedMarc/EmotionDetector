@@ -16,7 +16,7 @@ namespace EmotionDetector.Application
             _repository = repository;
         }
 
-        public List<ChatMessage> GetMessages(string filePath)
+        public ObservableCollection<string> GetMessages(string filePath)
         {
             var allMessages = _repository.GetMessages(filePath);
             return allMessages;

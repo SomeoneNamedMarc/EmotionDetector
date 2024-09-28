@@ -26,7 +26,7 @@ namespace EmotionDetector.Infastructure
         //                }).ToList();
         //    return messages;
         //}
-        public List<ChatMessage> GetMessages(string filePath)
+        public ObservableCollection<string> GetMessages(string filePath)
         {
             Convo conversation = new Convo();
 
@@ -37,15 +37,19 @@ namespace EmotionDetector.Infastructure
             conversation.Mood = GetEmotion(filePath);
 
             List<ChatMessage> messages = new List<ChatMessage>();
+            ObservableCollection<string> obsMsg = new ObservableCollection<string>();
 
             foreach (string chatMessage in chatContent)
             {
                 messages.Add(new ChatMessage(chatMessage));
+                obsMsg.Add(chatMessage);
             }
+            
 
             conversation.ChatMessages = messages;
 
-            return conversation.ChatMessages;
+            //return conversation.ChatMessages;
+            return obsMsg;
         }
 
         public string GetEmotion(string filePath)

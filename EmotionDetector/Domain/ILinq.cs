@@ -9,7 +9,7 @@ namespace EmotionDetector.Domain
 {
     internal interface ILinq
     {
-        List<ChatMessage> GetMessages(string filePath);
+        ObservableCollection<string> GetMessages(string filePath);
         string GetEmotion(string filePath);
         ObservableCollection<string> GetAllEmotions(string filePath);
         ObservableCollection<string> GetAllFileNames(string filePath);

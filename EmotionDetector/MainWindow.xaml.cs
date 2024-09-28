@@ -34,6 +34,7 @@ namespace EmotionDetector
         {
             InitializeComponent();
             loadUseCase = new LoadUseCase(new FileService());
+            //Messages = loadUseCase.GetMessages("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\ChatMessage2.0Happy.xml");
             Messages = new ObservableCollection<string>
             {
                 "Message 1 (right-aligned)",
@@ -71,6 +72,7 @@ namespace EmotionDetector
                 _selectedConversation = value;
                 OnPropertyChanged(nameof(SelectedConversation));
                 MessageBox.Show($"You selected: {SelectedConversation}");
+                Messages = loadUseCase.GetMessages("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\ChatMessage2.0Happy.xml");
             }
         }
 
