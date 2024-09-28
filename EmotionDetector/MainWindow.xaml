@@ -40,7 +40,7 @@
     
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Height="32" Orientation="Horizontal">
-            <ComboBox Width="120" Margin="105,0,0,0" ItemsSource="{Binding EmotionsSelection}" x:Name="MoodSelection" Control.HorizontalAlignment="Center" Control.VerticalAlignment="Center"/>
+            <ComboBox Width="120" Margin="105,0,0,0" ItemsSource="{Binding EmotionsSelection}" x:Name="MoodSelection" SelectedItem="{Binding SelectedEmotion, Mode=TwoWay}" Control.HorizontalAlignment="Center" Control.VerticalAlignment="Center"/>
             <TextBlock Text="Emotion" IsHitTestVisible="False" Margin="-85,7,0,0">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -95,7 +95,7 @@
 
         <StackPanel DockPanel.Dock="Left" Width="100">
             <TextBlock FontWeight="Bold" TextWrapping="Wrap" Text="Conversations" HorizontalAlignment="Center" Width="101" Height="32" Padding="10, 7, 0, 0"  Background="#FFE6E6E6"/>
-            <ListView Height="521" Background="White" ItemsSource="{Binding Conversations}">
+            <ListView Height="521" Background="White" ItemsSource="{Binding Conversations}" SelectedItem="{Binding SelectedConversation, Mode=TwoWay}">
             </ListView>
         </StackPanel>
 

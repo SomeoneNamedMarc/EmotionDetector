@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -19,9 +20,11 @@ namespace EmotionDetector
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {   
-
+    public partial class MainWindow : Window, INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private string _selectedEmotion;
+        private string _selectedConversation;
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<string> Conversations { get; set; }
         public ObservableCollection<string> EmotionsSelection { get; set; }
@@ -43,9 +46,32 @@ namespace EmotionDetector
             EmotionsSelection = loadUseCase.AllEmotions("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
 
             DataContext = this;
+        }
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-            
+        public string SelectedEmotion
+        {
+            get => _selectedEmotion;
+            set
+            {
+                _selectedEmotion = value;
+                OnPropertyChanged(nameof(SelectedEmotion));
+                MessageBox.Show($"You selected: {SelectedEmotion}");
+            }
+        }
 
+        public string SelectedConversation
+        {
+            get => _selectedConversation;
+            set
+            {
+                _selectedConversation = value;
+                OnPropertyChanged(nameof(SelectedConversation));
+                MessageBox.Show($"You selected: {SelectedConversation}");
+            }
         }
 
         void btnSearchOnClick(object sender, RoutedEventArgs e)
