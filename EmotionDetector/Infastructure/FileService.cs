@@ -14,18 +14,6 @@ namespace EmotionDetector.Infastructure
 {
     internal class FileService : ILinq
     {       
-        //public List<ChatMessage> LoadMessages(string filePath)
-        //{
-        //    var messages = new List<ChatMessage>();
-        //    var xml = XDocument.Load(filePath);
-
-        //    messages = (from msg in xml.Descendants("message")
-        //                select new ChatMessage
-        //                {
-        //                    Message = msg.Element("text").Value,
-        //                }).ToList();
-        //    return messages;
-        //}
         public ObservableCollection<string> GetMessages(string filePath)
         {
             Convo conversation = new Convo();
