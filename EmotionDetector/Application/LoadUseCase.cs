@@ -1,6 +1,7 @@
 ﻿using EmotionDetector.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace EmotionDetector.Application
         {
             var allMessages = _repository.GetMessages(filePath);
             return allMessages;
+        }
+
+        public ObservableCollection<string> AllEmotions(string filePath)
+        {
+            return _repository.GetAllEmotions(filePath);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace EmotionDetector
         public MainWindow()
         {
             InitializeComponent();
+            loadUseCase = new LoadUseCase(new FileService());
             Messages = new ObservableCollection<string>
             {
                 "Message 1 (right-aligned)",
@@ -46,25 +47,23 @@ namespace EmotionDetector
                 "REEE",
                 "REEEE"
             };
-            EmotionsSelection = new ObservableCollection<string>
-            {
-                "None",
-                "HappyConvo",
-                "SadConvo",
-                "AngryConvo",
-                "REEE",
-                "REEEE"
-            };
+            EmotionsSelection = loadUseCase.AllEmotions("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
 
             DataContext = this;
 
-            loadUseCase = new LoadUseCase(new FileService());
+            
+
         }
 
         void btnSearchOnClick(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show($"Word: fun\nOccurs: {moodCol.Values.Max()} times.\nEmotion: {moodCol.MaxBy(entry => entry.Value).Key}");
             MessageBox.Show(SearchTermTextBox.Text);
+            //messages.clear();
+            //foreach (var message in loadusecase.getmessages("c:\\users\\mikae\\source\\repos\\emotiondetector\\emotiondetector\\files\\chatmessage1.0sad.xml"))
+            //{
+            //    messages.add(message.message);
+            //}
         }
         void btnSearchOccuranceOnClick(object sender, RoutedEventArgs e)
         {

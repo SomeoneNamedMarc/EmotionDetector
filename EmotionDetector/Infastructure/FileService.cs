@@ -7,6 +7,7 @@ using System.IO;
 using EmotionDetector.Domain;
 
 using System.Xml.Linq;
+using System.Collections.ObjectModel;
 
 namespace EmotionDetector.Infastructure
 {
@@ -53,6 +54,23 @@ namespace EmotionDetector.Infastructure
             IEnumerable<string> emotionContent = from Messages in chatMessages.Descendants("Emotion") select Messages.Value;
 
             return emotionContent.First();
+        }
+
+        public ObservableCollection<string> GetAllEmotions(string filePath)
+        {
+            XElement chatMessages = XElement.Load(filePath);
+            IEnumerable<string> emotionContent = from Messages in chatMessages.Descendants("Emotion") select Messages.Value;
+            ObservableCollection<string> tempEmotions = new ObservableCollection<string>();
+
+            foreach (string emotion in emotionContent)
+            {
+                if (!tempEmotions.Contains(emotion))
+                {
+                    tempEmotions.Add(emotion);
+                }
+            }
+
+            return tempEmotions;
         }
     }
 }
