@@ -60,6 +60,7 @@ namespace EmotionDetector.Infastructure
 
         public ObservableCollection<string> GetAllEmotions(string filePath)
         {
+            ObservableCollection<string> tempEmotions = new ObservableCollection<string>();
             string[] files = Directory.GetFiles(filePath);
 
             foreach (var file in files)
@@ -72,27 +73,12 @@ namespace EmotionDetector.Infastructure
                     IEnumerable<string> EmotionContent = from Messages in ChatMessages.Descendants("Emotion") select Messages.Value;
                     IEnumerable<string> ChatContent = from Messages in ChatMessages.Descendants("Message") select Messages.Value;
 
-                    if (!moodCol.ContainsKey(EmotionContent.First()))
+                    if (!tempEmotions.Contains(EmotionContent.First()))
                     {
-                        moodCol.Add(EmotionContent.First(), 0);
-                    }
-
-                    foreach (var item in ChatContent)
-                    {
-                        string[] splitMessages = item.Split(" ");
-
-                        foreach (var msg in splitMessages)
-                        {
-                            if (msg.ToLower().Contains("fun"))
-                            {
-                                moodCol[EmotionContent.First()] += 1;
-                            }
-                        }
+                        tempEmotions.Add(EmotionContent.First());
                     }
                 }
-                Debug.WriteLine(moodCol.Values.Max());
             }
-
             return tempEmotions;
         }
     }
