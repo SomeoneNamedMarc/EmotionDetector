@@ -36,16 +36,9 @@ namespace EmotionDetector
         {
             InitializeComponent();
             loadUseCase = new LoadUseCase(new FileService());
-            Messages = new ObservableCollection<string>
-            {
-                "Message 1 (right-aligned)",
-                "Message 2 (left-aligned)",
-                "Message 3 (right-aligned)",
-                "Message 4 (left-aligned)",
-                "Another long message to see the wrapping behavior. rEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-            };
-            Conversations = loadUseCase.GetAllFileNames("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
-            EmotionsSelection = loadUseCase.AllEmotions("C:\\Users\\mikae\\Source\\Repos\\EmotionDetector\\EmotionDetector\\Files\\");
+
+            Conversations = loadUseCase.GetAllFileNames(path);
+            EmotionsSelection = loadUseCase.AllEmotions(path);
 
             DataContext = this;
         }
